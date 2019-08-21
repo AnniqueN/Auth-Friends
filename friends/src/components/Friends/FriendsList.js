@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { getFriends } from '../../actions';
@@ -6,11 +6,7 @@ import { getFriends } from '../../actions';
 import FriendCard from './FriendCard';
 
 const FriendsList = props => {
-  //useEffect(() => {
-   // props.getFriends();
-  // }, [props.friends]);
-
-  console.log(props)
+  
 
   return (
     <div className="friends-list-container">
@@ -25,10 +21,12 @@ const FriendsList = props => {
           </tr>
         </thead>
         <tbody>
-          {/*<button onClick={props.getFriends()}>Get Friends</button>*/}
-          {props.getFriends()}
-          {props.getFriendIsLoading && props.friends.map(friend => {
-            return <FriendCard key={friend.id} friend={friend} />;
+          <tr>
+            <th onClick={() => props.getFriends()}>Get Friends</th>
+          </tr>
+          {props.friends && props.friends.map(friend => {
+            console.log(friend)
+            return <FriendCard key={friend.email} friend={friend} />;
           })}
         </tbody>
       </Table>
@@ -39,7 +37,7 @@ const FriendsList = props => {
 const mapStateToProps = state => {
   return {
     friends: state.friends,
-    getFriendIsLoading: state.getFriendIsLoading
+    loginIsLoading: state.loginIsLoading
   };
 };
 

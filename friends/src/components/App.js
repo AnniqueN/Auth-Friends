@@ -16,10 +16,12 @@ const App = () => {
       <NavigationBar />
       <Switch>
         <Route path="/login" component={LoginForm} />
-        <PrivateRoute exact path="/friends" component={FriendsList} />
-        <PrivateRoute exact path="/addFriend" component={AddFriend} />
-        <PrivateRoute exact path="/updateFriend" component={UpdateFriend} />
-        <PrivateRoute exact path="/deleteFriend" component={DeleteFriend} />
+        <PrivateRoute  path="/logout" component={LoginForm} />
+        <PrivateRoute  path="/friends" component={FriendsList} />
+        <PrivateRoute  path="/addFriend" component={AddFriend} />
+        <PrivateRoute  path="/updateFriend" component={UpdateFriend} />
+        <PrivateRoute  path="/deleteFriend" component={DeleteFriend} />
+
       </Switch>
     </BrowserRouter>
   );

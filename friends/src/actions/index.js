@@ -21,11 +21,12 @@ console.log(user)
     .post('http://localhost:5000/api/login', user)
     .then(res => {
         console.log (res.data)
-      dispatch({ type: LOGIN_SUCCESS });
+      
       localStorage.setItem('token', res.data.payload);
+      dispatch({ type: LOGIN_SUCCESS });
       // console.log('JWT Token', res.data.payload);
       // Goes to friend's list if successful
-    //   props.history.push('/friends');
+    
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });
@@ -36,9 +37,10 @@ export const getFriends = () => dispatch => {
   dispatch({ type: GET_FRIENDS_START });
 
   axiosWithAuth()
-    .get('/friends')
+    .get('http://localhost:5000/api/friends')
     .then(res => {
-      // console.log(res.data);
+      
+      console.log("getFriend")
       dispatch({ type: GET_FRIENDS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -53,7 +55,7 @@ export const addFriend = (friend) => dispatch => {
     .post('/friends', friend)
     .then(res => {
       dispatch({ type: ADD_FRIEND_SUCCESS, payload: friend });
-    //   props.history.push('/friends')
+    
     })
     .catch(err => {
       dispatch({ type: ADD_FRIEND_FAILURE, payload: err.response });

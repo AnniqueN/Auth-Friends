@@ -7,8 +7,8 @@ import { login } from '../../actions';
 const LoginForm = props => {
   // const [user, setUser] = useState({ username: '', password: '' });
   const [user, setUser] = useState({
-    username: '',
-    password: '',
+    username: 'Lambda School',
+    password: 'i<3Lambd4',
   });
 
   const handleChanges = event => {

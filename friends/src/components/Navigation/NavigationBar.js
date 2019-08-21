@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const NavigationBar = props => {
+  
+  const [isLoggedIn, setIsLoggedIn] = useState();
 
-  console.log("nav props", props)
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('token') ) {
+      setIsLoggedIn(true);
+      console.log("useEffect", isLoggedIn)
+    }
+  }, [localStorage.getItem('token')]);
 
-  //useEffect(() => {
-   // if (localStorage.getItem('token')) {
-   //   setIsLoggedIn(true);
-    //}
-  ///}, [isLoggedIn]);
 
   // Re-factor into action creator
   // Move state into redux!
   const logout = () => {
-    localStorage.removeItem('token');
-    return <Redirect to="/login" />;
+    setIsLoggedIn(false)
+    localStorage.removeItem('token')
+   return ""
   };
 
   return (
@@ -29,8 +31,9 @@ const NavigationBar = props => {
         </NavbarBrand>
 
         <Nav className="ml-auto" navbar>
-          {!props.loginIsLoading ? (
+          {isLoggedIn ? (
             <>
+              {console.log(isLoggedIn, "after")}
               <NavItem>
                 <NavLink tag={Link} to="/addFriend">
                   Add Friend
@@ -38,7 +41,9 @@ const NavigationBar = props => {
               </NavItem>
               
               <NavItem>
-                <NavLink  onClick={()=>logout()} to="/login">Logout</NavLink>
+                <NavLink onClick={() => logout()} to="/login">
+                  Logout
+                </NavLink>
               </NavItem>
             </>
           ) : (
